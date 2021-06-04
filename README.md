@@ -36,7 +36,9 @@ $ apig-test \
   --params='{}' \
   --additional-params='{}' \
   --access-token-header='cognito-access-token' \
-  --body='{}'
+  --body='{}' \
+	--debug \
+	--json
 ```
 
 If you have it locally installed:
@@ -70,7 +72,7 @@ This command takes the following options:
 
 - `api-gateway-region`
   The API Gateway region. Defaults to `us-east-1`.
-  
+
 - `api-key`
   The API key if required by the method. Defaults to none.
 
@@ -92,6 +94,12 @@ This command takes the following options:
 - `body`
   The request body as a JSON string. Defaults to `'{}'`. Alternatively, reference a file with a JSON string using `--body='@mocks/create.json'` where `mocks/create.json` is the file with the request body.
 
+- `debug`
+  Additional debug output for response and errors
+
+- `json`
+  Convert response body to json string
+
 For additional documentation on the format for `params` and `additional-params`; refer to the generic [API Gateway Client][apiGClient] docs.
 
 ### Examples
@@ -110,7 +118,9 @@ $ npx aws-api-gateway-cli-test \
 --api-gateway-region='us-east-1' \
 --path-template='/notes/{id}' \
 --params='{"id":"456"}' \
---method='GET'
+--method='GET' \
+--debug \
+--json
 ```
 
 To pass in query parameters and headers with your request.
@@ -127,7 +137,9 @@ $ npx aws-api-gateway-cli-test \
 --api-gateway-region='us-east-1' \
 --path-template='/notes' \
 --additional-params='{"queryParams":{"param0":"abc"},"headers":{"param1":"123"}}' \
---method='GET'
+--method='GET' \
+--debug \
+--json
 ```
 
 

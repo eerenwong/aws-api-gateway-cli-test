@@ -78,8 +78,13 @@ var argv = require("yargs")
     describe: "Additional debug output for response and errors",
     default: false
   })
+	.option("json",{
+    describe: "Convert response body to json string",
+    default: false
+  })
   .help("h")
 	.alias("d", "debug")
+	.alias("j", "json")
   .alias("h", "help")
   .alias("v", "version")
   .version(packageJson.version)
@@ -200,6 +205,8 @@ function makeRequest(userTokens) {
       console.dir({
         status: result.status,
         statusText: result.statusText,
+        data: argv.json ? JSON.stringify(result.data) : result.data,
+			},{
 				showHidden:argv.debug,
 				depth:argv.debug ? null : 2,
 				colors:argv.debug
@@ -210,6 +217,8 @@ function makeRequest(userTokens) {
         console.dir({
           status: result.response.status,
           statusText: result.response.statusText,
+          data: argv.json ? JSON.stringify(result.response.data) : result.response.data,
+        },{
           showHidden:argv.debug,
           depth:argv.debug ? null : 2,
           colors:argv.debug
